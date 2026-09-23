@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — BelleLee</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system, sans-serif;}
+    body{background:#fef2f7;padding:2rem;max-width:800px;margin:0 auto;}
+    h1{color:#d81b60;margin-bottom:2rem;}
+    .card{background:white;padding:2rem;border-radius:1rem;box-shadow:0 2px 8px rgba(0,0,0,.08);margin-bottom:1.5rem;}
+    input,textarea,select{width:100%;padding:.75rem;margin:.5rem 0 1rem;border:1.5px solid #f8bbd0;border-radius:.5rem;font-size:1rem;outline:none;}
+    input:focus,textarea:focus{border-color:#d81b60;}
+    button{background:#d81b60;color:white;border:none;padding:.75rem 1.5rem;border-radius:.5rem;font-size:1rem;cursor:pointer;margin-right:.5rem;}
+    button:hover{background:#c2185b;}
+    .btn-secondary{background:#f3e5e9;color:#ad1457;}
+    .btn-secondary:hover{background:#f8cdd7;}
+    .product-item{border-bottom:1px solid #fce4ec;padding:1rem 0;}
+    .hidden{display:none;}
+  </style>
+</head>
+<body>
+  <h1>⚙️ BelleLee Admin</h1>
+
+  <!-- 登录区 -->
+  <div class="card" id="loginArea">
+    <h3>Admin Login</h3>
+    <input type="password" id="adminPass" placeholder="Enter password">
+    <button onclick="login()">Login</button>
+  </div>
+
+  <!-- 管理区 -->
+  <div id="adminArea" class="hidden">
+    <div class="card">
+      <h3>⚙️ Settings</h3>
+      <input type="text" id="waNumber" placeholder="WhatsApp e.g. 60123456789">
+      <button onclick="saveSettings()">Save WhatsApp</button>
+    </div>
+    <p style="color:#666;margin-top:2rem;">✅ Admin page ready! Edit products directly in index.html for now.</p>
+  </div>
+
+<script>
+const ADMIN_PASS = "bellelee2026"; // 密码：bellelee2026
+
+function login(){
+  if(document.getElementById('adminPass').value === ADMIN_PASS){
+    document.getElementById('loginArea').classList.add('hidden');
+    document.getElementById('adminArea').classList.remove('hidden');
+    loadSettings();
+  }else alert("Wrong password — try again");
+}
+
+function saveSettings(){
+  localStorage.setItem('waPhone', document.getElementById('waNumber').value);
+  alert("✅ WhatsApp saved! Update it in index.html too");
+}
+
+function loadSettings(){
+  const saved = localStorage.getItem('waPhone');
+  if(saved) document.getElementById('waNumber').value = saved;
+}
+</script>
+</body>
+</html>
